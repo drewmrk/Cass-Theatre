@@ -4,16 +4,16 @@ import { auth } from '../db/functions'
 export const AuthContext = React.createContext(null)
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = React.useState(null)
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
   React.useEffect(() => {
     auth().onAuthStateChanged(user => {
-      setCurrentUser(user)
+      user ? setIsLoggedIn(true) : setIsLoggedIn(false)
     })
   })
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   )

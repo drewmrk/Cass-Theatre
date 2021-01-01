@@ -4,13 +4,13 @@ import { AuthContext } from '../services/Auth'
 import Home from '../pages/Home'
 
 const Protected = ({ component: RouteComponent, ...rest }) => {
-  const { currentUser } = React.useContext(AuthContext)
+  const { isLoggedIn } = React.useContext(AuthContext)
 
   return (
     <Route
       {...rest}
       render={routeProps =>
-        currentUser ? <RouteComponent {...routeProps} /> : <Home />
+        isLoggedIn ? <RouteComponent {...routeProps} /> : <Home />
       }
     />
   )
